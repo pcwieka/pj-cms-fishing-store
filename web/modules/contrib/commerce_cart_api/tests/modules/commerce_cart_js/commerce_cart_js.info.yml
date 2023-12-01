@@ -1,0 +1,12 @@
+name: 'Commerce Cart: JS'
+description: 'Provides cart block and form replacements using Backbone.js and Underscore'
+core_version_requirement: ^8.8 || ^9
+type: module
+package: Testing
+dependencies:
+  - commerce_cart
+
+# Information added by Drupal.org packaging script on 2022-08-02
+version: '8.x-1.6'
+project: 'commerce_cart_api'
+datestamp: 1659436448
