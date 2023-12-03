@@ -1,0 +1,4 @@
+administer lakes gear:
+  title: 'Administer Lakes Gear'
+  description: 'Allows administering of the Lakes Gear.'
+  restrict access: true

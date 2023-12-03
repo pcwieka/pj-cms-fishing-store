@@ -1,0 +1,6 @@
+name: Lakes Gear
+type: module
+description: Displaying lakes and recommended fishing gear
+package: Custom
+core: 8.x
+core_version_requirement: ^8 || ^9

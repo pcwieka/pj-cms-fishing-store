@@ -1,0 +1,10 @@
+lakes_gear.admin:
+  title: 'Jeziora i sprzęt'
+  description: 'Ustawienia modułu Lakes Gear'
+  route_name: 'lakes_gear.admin.list'
+  parent: 'system.admin'
+  weight: 100
+  options:
+    attributes:
+      class:
+        - 'lakes-gear-menu-icon'
