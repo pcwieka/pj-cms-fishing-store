@@ -1,0 +1,39 @@
+lakes_gear.admin.list:
+  path: '/admin/lakes-gear/lakes'
+  defaults:
+    _controller: '\Drupal\lakes_gear\Controller\Admin\LakesGearAdminController::listLakes'
+    _title: 'Lista jezior'
+  requirements:
+    _permission: 'administer lakes gear'
+
+lakes_gear.admin.add:
+  path: '/admin/lakes-gear/lake/add'
+  defaults:
+    _form: '\Drupal\lakes_gear\Form\Admin\AddLakeForm'
+    _title: 'Dodaj jezioro'
+  requirements:
+    _permission: 'administer lakes gear'
+
+lakes_gear.admin.edit:
+  path: '/admin/lakes-gear/lake/{lake_id}/edit'
+  defaults:
+    _form: '\Drupal\lakes_gear\Form\Admin\EditLakeForm'
+    _title: 'Edytuj jezioro'
+  requirements:
+    _permission: 'administer lakes gear'
+
+lakes_gear.admin.delete:
+  path: '/admin/lakes-gear/lake/{lake_id}/delete'
+  defaults:
+    _form: '\Drupal\lakes_gear\Form\Admin\DeleteLakeForm'
+    _title: 'Usuń jezioro'
+  requirements:
+    _permission: 'administer lakes gear'
+
+lakes_gear.store.lakes_gear:
+  path: '/lakes-gear'
+  defaults:
+    _controller: '\Drupal\lakes_gear\Controller\Store\LakesGearStoreController::lakesGear'
+    _title: 'Wędkuj z nami!'
+  requirements:
+    _permission: 'access content'

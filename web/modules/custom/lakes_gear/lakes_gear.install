@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Lakes Gear module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function lakes_gear_install() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function lakes_gear_uninstall() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}
+
+/**
+ * Implements hook_schema().
+ */
+function lakes_gear_schema() {
+    $schema['lakes_gear_lakes'] = [
+        'description' => 'Stores information about lakes.',
+        'fields' => [
+            'lake_id' => [
+                'description' => 'The primary identifier for a lake.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
+            'lake_name' => [
+                'description' => 'The name of the lake.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+            ],
+        ],
+        'primary key' => ['lake_id'],
+    ];
+
+    $schema['lakes_gear_lakes_products'] = [
+        'description' => 'Associates products with lakes.',
+        'fields' => [
+            'lake_id' => [
+                'description' => 'The ID of the lake.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
+            'product_id' => [
+                'description' => 'The ID of the product.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
+        ],
+        'foreign keys' => [
+            'lake_id' => ['lakes_gear_lakes', 'lake_id'],
+            'product_id' => ['commerce_product', 'product_id'],
+        ],
+    ];
+
+    return $schema;
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function lakes_gear_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'runtime') {
+    $value = mt_rand(0, 100);
+    $requirements['lakes_gear_status'] = [
+      'title' => t('Lakes Gear status'),
+      'value' => t('Lakes Gear value: @value', ['@value' => $value]),
+      'severity' => $value > 50 ? REQUIREMENT_INFO : REQUIREMENT_WARNING,
+    ];
+  }
+
+  return $requirements;
+}
