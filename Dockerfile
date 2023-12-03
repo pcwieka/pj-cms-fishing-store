@@ -68,6 +68,9 @@ RUN rmdir /var/www/html && ln -sf /opt/drupal/web /var/www/html
 
 RUN rm -rf "$COMPOSER_HOME"
 
+RUN apt-get update
+RUN apt-get install -y rsync
+
 ENV PATH=${PATH}:/opt/drupal/vendor/bin
 
 # vim:set ft=dockerfile:

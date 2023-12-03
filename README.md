@@ -1,11 +1,35 @@
-# Commerce 2.x demo project template
+# Fishing Store for PJ CMS
 
 Use [Composer](https://getcomposer.org/) to get Drupal + Commerce 2.x + demo content.
 
 Based on [drupalcommerce/project-base](https://github.com/drupalcommerce/project-base), plus
 a [custom theme](https://drupal.org/project/belgrade) and [demo content](https://drupal.org/project/commerce_demo).
 
-![Belgrade product example](assets/belgrade-product.jpg)
+## Deployment
+
+See Makefile. To deploy your changes to the docker container use:
+
+```
+make docker-upload-dry-run
+```
+
+If you are okay with the changes, then:
+
+```
+make docker-upload
+```
+
+In order to deploy to the remote server use:
+
+```
+make upload-dry-run
+```
+
+If you are okay with the changes, then:
+
+```
+make upload
+```
 
 ## Usage
 
