@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+  fishing-store:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fishing-store
+    ports:
+      - "8099:80"
+    depends_on:
+      - fishing-store-db
+    networks:
+      - fishing-store-network
+
+  fishing-store-db:
+    image: mysql:latest
+    container_name: fishing-store-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3311:3306"
+    networks:
+      - fishing-store-network
+    hostname: fishing-store-db
+
+networks:
+  fishing-store-network:
+    driver: bridge
