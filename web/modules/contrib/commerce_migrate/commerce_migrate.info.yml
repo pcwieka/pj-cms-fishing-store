@@ -1,0 +1,14 @@
+name: Commerce Migrate
+type: module
+description: Provides various Commerce-specific Migrate handlers.
+core_version_requirement: ^9.3
+package: Commerce (contrib)
+dependencies:
+  - drupal:migrate
+  - drupal:telephone
+  - migrate_plus:migrate_plus
+
+# Information added by Drupal.org packaging script on 2023-07-09
+version: '3.2.1'
+project: 'commerce_migrate'
+datestamp: 1688901877

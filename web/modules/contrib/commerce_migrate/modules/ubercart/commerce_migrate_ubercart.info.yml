@@ -1,0 +1,15 @@
+name: Commerce Migrate Ubercart
+type: module
+description: Provides migrations for Ubercart.
+core_version_requirement: ^9.1
+package: Commerce (contrib)
+dependencies:
+  - commerce:commerce
+  - drupal:migrate_drupal
+  - commerce_migrate:commerce_migrate
+  - migrate_plus:migrate_plus
+
+# Information added by Drupal.org packaging script on 2023-07-09
+version: '3.2.1'
+project: 'commerce_migrate'
+datestamp: 1688901877

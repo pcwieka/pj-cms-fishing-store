@@ -40,6 +40,8 @@
         "ext-curl": "*",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.7",
+        "drupal/backup_migrate": "^5.0",
+        "drupal/commerce_migrate": "^3.2",
         "drupal/core": "^9.0",
         "drupal/core-composer-scaffold": "^9.0",
         "drupalcommerce/demo_commerce": "dev-master",

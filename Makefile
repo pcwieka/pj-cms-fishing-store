@@ -17,13 +17,13 @@ docker-undeploy:
 	docker-compose down
 
 docker-upload-dry-run:
-	rsync -av --dry-run -e 'docker exec -i' --exclude-from=$(EXCLUDES_FILE) ./ $(CONTAINER_NAME):$(CONTAINER_TARGET_PATH)
+	rsync -av --dry-run -e 'docker exec -i' --delete --exclude-from=$(EXCLUDES_FILE) ./ $(CONTAINER_NAME):$(CONTAINER_TARGET_PATH)
 
 docker-upload:
-	rsync -av -e 'docker exec -i' --exclude-from=$(EXCLUDES_FILE) ./ $(CONTAINER_NAME):$(CONTAINER_TARGET_PATH)
+	rsync -av -e 'docker exec -i' --delete --exclude-from=$(EXCLUDES_FILE) ./ $(CONTAINER_NAME):$(CONTAINER_TARGET_PATH)
 
 upload-dry-run:
-	rsync -av --dry-run -e "ssh -p 22222" --exclude-from=$(EXCLUDES_FILE) ./ $(SERVER_UPLOAD_TARGET_PATH)
+	rsync -av --dry-run -e "ssh -p 22222" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SERVER_UPLOAD_TARGET_PATH)
 
 upload:
-	rsync -av -e "ssh -p 22222" --exclude-from=$(EXCLUDES_FILE) ./ $(SERVER_UPLOAD_TARGET_PATH)
+	rsync -av -e "ssh -p 22222" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SERVER_UPLOAD_TARGET_PATH)

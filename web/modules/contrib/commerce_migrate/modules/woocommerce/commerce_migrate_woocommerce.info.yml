@@ -1,0 +1,14 @@
+name: Commerce Migrate WooCommerce
+type: module
+description: Provides migrations for WooCommerce
+core_version_requirement: ^9.1
+package: Commerce (contrib)
+dependencies:
+  - commerce:commerce
+  - commerce_migrate:commerce_migrate
+  - migrate_source_csv:migrate_source_csv
+
+# Information added by Drupal.org packaging script on 2023-07-09
+version: '3.2.1'
+project: 'commerce_migrate'
+datestamp: 1688901877

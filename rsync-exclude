@@ -3,3 +3,4 @@ web/sites/*/settings.local.php
 web/sites/*/files/
 vendor/
 .git/
+.idea/
