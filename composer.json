@@ -45,6 +45,7 @@
         "drupal/core": "^9.0",
         "drupal/core-composer-scaffold": "^9.0",
         "drupalcommerce/demo_commerce": "dev-master",
+        "drupal/facets": "^2.0",
         "drush/drush": "^9.7.1 | ^10.0.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "webflo/drupal-finder": "^1.0.0",

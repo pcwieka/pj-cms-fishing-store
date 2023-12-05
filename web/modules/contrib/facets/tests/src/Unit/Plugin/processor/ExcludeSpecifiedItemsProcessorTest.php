@@ -19,7 +19,7 @@ class ExcludeSpecifiedItemsProcessorTest extends UnitTestCase {
   /**
    * The processor to be tested.
    *
-   * @var \Drupal\facets\processor\BuildProcessorInterface
+   * @var \Drupal\facets\Processor\BuildProcessorInterface
    */
   protected $processor;
 
@@ -33,7 +33,7 @@ class ExcludeSpecifiedItemsProcessorTest extends UnitTestCase {
   /**
    * Creates a new processor object for use in the tests.
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $facet = new Facet([], 'facets_facet');
@@ -68,9 +68,7 @@ class ExcludeSpecifiedItemsProcessorTest extends UnitTestCase {
       ],
     ];
 
-    $manager = $this->getMockBuilder(ProcessorPluginManager::class)
-      ->disableOriginalConstructor()
-      ->getMock();
+    $manager = $this->createMock(ProcessorPluginManager::class);
     $manager->expects($this->any())
       ->method('getDefinitions')
       ->willReturn($processor_definitions);

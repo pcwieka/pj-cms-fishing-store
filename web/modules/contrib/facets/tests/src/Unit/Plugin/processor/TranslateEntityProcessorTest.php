@@ -28,36 +28,32 @@ class TranslateEntityProcessorTest extends UnitTestCase {
   /**
    * The mocked language manager.
    *
-   * @var \Drupal\Core\Language\LanguageManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Language\LanguageManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $languageManager;
 
   /**
    * The mocked entity type manager.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Mock language manager.
-    $this->languageManager = $this->getMockBuilder(LanguageManagerInterface::class)
-      ->disableOriginalConstructor()
-      ->getMock();
+    $this->languageManager = $this->createMock(LanguageManagerInterface::class);
     $language = new Language(['langcode' => 'en']);
     $this->languageManager->expects($this->any())
       ->method('getCurrentLanguage')
       ->will($this->returnValue($language));
 
     // Mock entity type manager.
-    $this->entityTypeManager = $this->getMockBuilder(EntityTypeManagerInterface::class)
-      ->disableOriginalConstructor()
-      ->getMock();
+    $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
 
     // Create and set a global container with the language manager and entity
     // type manager.
@@ -100,9 +96,7 @@ class TranslateEntityProcessorTest extends UnitTestCase {
         ->willReturn([$property_definition]);
 
       // Create the actual facet.
-      $facet = $this->getMockBuilder(Facet::class)
-        ->disableOriginalConstructor()
-        ->getMock();
+      $facet = $this->createMock(Facet::class);
       $facet->expects($this->any())
         ->method('getDataDefinition')
         ->willReturn($data_definition);
@@ -125,18 +119,16 @@ class TranslateEntityProcessorTest extends UnitTestCase {
   /**
    * Tests that node results were correctly changed.
    *
-   * @dataProvider facetDataProvider
-   *
    * @param \Drupal\facets\FacetInterface $facet
    *   A facet mock.
    * @param array $results
    *   The facet original results mock.
+   *
+   * @dataProvider facetDataProvider
    */
   public function testNodeResultsChanged(FacetInterface $facet, array $results) {
     // Mock a node and add the label to it.
-    $node = $this->getMockBuilder(Node::class)
-      ->disableOriginalConstructor()
-      ->getMock();
+    $node = $this->createMock(Node::class);
     $node->expects($this->any())
       ->method('label')
       ->willReturn('shaken not stirred');
@@ -175,18 +167,16 @@ class TranslateEntityProcessorTest extends UnitTestCase {
   /**
    * Tests that term results were correctly changed.
    *
-   * @dataProvider facetDataProvider
-   *
    * @param \Drupal\facets\FacetInterface $facet
    *   A facet mock.
    * @param array $results
    *   The facet original results mock.
+   *
+   * @dataProvider facetDataProvider
    */
   public function testTermResultsChanged(FacetInterface $facet, array $results) {
     // Mock term.
-    $term = $this->getMockBuilder(Term::class)
-      ->disableOriginalConstructor()
-      ->getMock();
+    $term = $this->createMock(Term::class);
     $term->expects($this->once())
       ->method('label')
       ->willReturn('Burrowing owl');
@@ -226,12 +216,12 @@ class TranslateEntityProcessorTest extends UnitTestCase {
   /**
    * Test that deleted entities still in index results doesn't display.
    *
-   * @dataProvider facetDataProvider
-   *
    * @param \Drupal\facets\FacetInterface $facet
    *   A facet mock.
    * @param array $results
    *   The facet original results mock.
+   *
+   * @dataProvider facetDataProvider
    */
   public function testDeletedEntityResults(FacetInterface $facet, array $results) {
     // Set original results.

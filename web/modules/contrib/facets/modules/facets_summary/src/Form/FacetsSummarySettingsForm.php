@@ -54,6 +54,13 @@ class FacetsSummarySettingsForm extends EntityForm {
   protected $blockManager;
 
   /**
+   * The url generator.
+   *
+   * @var \Drupal\Core\Routing\UrlGeneratorInterface
+   */
+  protected $urlGenerator;
+
+  /**
    * Constructs an FacetDisplayForm object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -193,7 +200,13 @@ class FacetsSummarySettingsForm extends EntityForm {
 
     if ($is_new) {
       if ($this->moduleHandler->moduleExists('block')) {
-        $message = $this->t('Facet Summary %name has been created. Go to the <a href=":block_overview">Block overview page</a> to place the new block in the desired region.', ['%name' => $facets_summary->getName(), ':block_overview' => $this->urlGenerator->generateFromRoute('block.admin_display')]);
+        $message = $this->t(
+          'Facet Summary %name has been created. Go to the <a href=":block_overview">Block overview page</a> to place the new block in the desired region.',
+          [
+            '%name' => $facets_summary->getName(),
+            ':block_overview' => $this->urlGenerator->generateFromRoute('block.admin_display'),
+          ]
+        );
         $this->messenger()->addMessage($message);
         $form_state->setRedirect('entity.facets_summary.edit_form', ['facets_summary' => $facets_summary->id()]);
       }
@@ -228,7 +241,7 @@ class FacetsSummarySettingsForm extends EntityForm {
     // Clear Drupal cache for blocks to reflect recent changes.
     $this->blockManager->clearCachedDefinitions();
     $facet_source_id = $form_state->getValue('facet_source_id');
-    list($type,) = explode(':', $facet_source_id);
+    [$type] = explode(':', $facet_source_id);
     if ($type !== 'search_api') {
       return $facets_summary;
     }

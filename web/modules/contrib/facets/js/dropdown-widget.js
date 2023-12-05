@@ -3,7 +3,7 @@
  * Transforms links into a dropdown list.
  */
 
-(function ($) {
+(function ($, once) {
 
   'use strict';
 
@@ -24,13 +24,13 @@
    */
   Drupal.facets.makeDropdown = function (context, settings) {
     // Find all dropdown facet links and turn them into an option.
-    $('.js-facets-dropdown-links').once('facets-dropdown-transform').each(function () {
+    $(once('facets-dropdown-transform', '.js-facets-dropdown-links')).each(function () {
       var $ul = $(this);
       var $links = $ul.find('.facet-item a');
       var $dropdown = $('<select></select>');
       // Preserve all attributes of the list.
-      $ul.each(function() {
-        $.each(this.attributes,function(idx, elem) {
+      $ul.each(function () {
+        $.each(this.attributes,function (idx, elem) {
             $dropdown.attr(elem.name, elem.value);
         });
       });
@@ -43,7 +43,7 @@
 
       var id = $(this).data('drupal-facet-id');
       // Add aria-labelledby attribute to reference label.
-      $dropdown.attr('aria-labelledby', "facet_"+id+"_label");
+      $dropdown.attr('aria-labelledby', "facet_" + id + "_label");
       var default_option_label = settings.facets.dropdown_widget[id]['facet-default-option-label'];
 
       // Add empty text option first.
@@ -69,7 +69,7 @@
           $option.attr('selected', 'selected');
           $link.find('.js-facet-deactivate').remove();
         }
-        $option.text(function() {
+        $option.text(function () {
           // Add hierarchy indicator in case hierarchy is enabled.
           var $parents = $link.parent('li.facet-item').parents('li.facet-item');
           var prefix = '';
@@ -101,4 +101,4 @@
     });
   };
 
-})(jQuery);
+})(jQuery, once);
