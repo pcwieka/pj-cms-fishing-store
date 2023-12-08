@@ -31,12 +31,12 @@
     // home link
     a[data-drupal-link-system-path="<front>"]{
       @extend .text-hide;
-      width: 270px;
-      height: 42px;
+      width: 300px;
+      height: 195px;
       margin: 70px auto;
       padding: 0;
       background: url("../../logo.svg") no-repeat center;
-      filter: invert(1);
+      filter: invert(0);
     }
   }
 
