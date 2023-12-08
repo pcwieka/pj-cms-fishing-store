@@ -40,7 +40,7 @@
 }
 
 .color-preview-logo {
-  filter: invert(1);
+  filter: invert(0);
 }
 
 .color-preview-main-menu {
