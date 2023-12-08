@@ -1,11 +1,21 @@
 # Makefile
 
-EXCLUDES_FILE=rsync-exclude
-CONTAINER_NAME=fishing-store
-CONTAINER_TARGET_PATH=/opt/drupal
-SERVER_UPLOAD_TARGET_PATH=serwer2328033@serwer2328033.home.pl:/home/serwer2328033/public_html/fishing-store/
-SSH_COMMAND=ssh -p 22222
+PROJECT_NAME=fishing-store
 
+EXCLUDES_FILE=rsync-exclude
+
+CONTAINER_NAME=$(PROJECT_NAME)
+CONTAINER_TARGET_PATH=/opt/drupal
+
+SSH_COMMAND=ssh -p 22222
+SSH_USER=serwer2328033
+SSH_SERVER_URL=serwer2328033.home.pl
+SSH_SERVER_TARGET_DIRECTORY=/home/$(SSH_USER)/public_html/$(PROJECT_NAME)/
+SSH_SERVER_UPLOAD_FULL_PATH=$(SSH_USER)@$(SSH_SERVER_URL):$(SSH_SERVER_TARGET_DIRECTORY)
+BACKUP_TIME := $(shell date '+%Y-%m-%d_%H-%M-%S')
+SSH_SERVER_BACKUP_DIRECTORY=/home/$(SSH_USER)/public_html/$(PROJECT_NAME)-backup/$(PROJECT_NAME)-$(BACKUP_TIME)
+
+# Docker
 docker-build:
 	docker-compose build
 
@@ -23,11 +33,15 @@ docker-upload-dry-run:
 docker-upload:
 	rsync -av -e 'docker exec -i' --delete --exclude-from=$(EXCLUDES_FILE) ./ $(CONTAINER_NAME):$(CONTAINER_TARGET_PATH)
 
+# Server
+ssh:
+	ssh serwer2328033@serwer2328033.home.pl -p 22222
+
 backup:
-	$(SSH_COMMAND) serwer2328033@serwer2328033.home.pl "cp -r /home/serwer2328033/public_html/fishing-store/ \"/home/serwer2328033/public_html/fishing-store-backup/fishing-store_$$(date '+%Y-%m-%d_%H-%M-%S')\""
+	$(SSH_COMMAND) $(SSH_USER)@$(SSH_SERVER_URL) "cp -r $(SSH_SERVER_TARGET_DIRECTORY) \"$(SSH_SERVER_BACKUP_DIRECTORY)\""
 
 upload-dry-run:
-	rsync -av --dry-run -e "$(SSH_COMMAND)" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SERVER_UPLOAD_TARGET_PATH)
+	rsync -av --dry-run -e "$(SSH_COMMAND)" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SSH_SERVER_UPLOAD_FULL_PATH)
 
 upload:
-	rsync -av -e "$(SSH_COMMAND)" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SERVER_UPLOAD_TARGET_PATH)
+	rsync -av -e "$(SSH_COMMAND)" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SSH_SERVER_UPLOAD_FULL_PATH)
