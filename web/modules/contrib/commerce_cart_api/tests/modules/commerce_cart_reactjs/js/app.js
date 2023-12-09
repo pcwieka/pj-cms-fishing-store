@@ -1083,7 +1083,7 @@ if (true) {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {
@@ -3614,7 +3614,7 @@ var Cart = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'button',
                 { onClick: this.doItemsUpdate.bind(this) },
-                'Update quantities'
+                'Aktualizuj koszyk'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

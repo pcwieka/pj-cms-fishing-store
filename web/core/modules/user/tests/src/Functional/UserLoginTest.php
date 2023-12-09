@@ -315,7 +315,7 @@ class UserLoginTest extends BrowserTestBase {
     else {
       $this->assertSession()->statusCodeEquals(200);
       $this->assertSession()->fieldValueEquals('pass', '');
-      $this->assertSession()->pageTextContains('Unrecognized username or password. Forgot your password?');
+      $this->assertSession()->pageTextContains('Nieznana nazwa użytkownika lub hasło. Nie pamiętasz hasła?');
     }
   }
 

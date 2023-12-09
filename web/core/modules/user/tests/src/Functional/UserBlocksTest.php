@@ -130,9 +130,9 @@ class UserBlocksTest extends BrowserTestBase {
     $edit['pass'] = 'invalid password';
     $this->drupalGet('filter/tips');
     $this->submitForm($edit, 'Log in');
-    $this->assertSession()->pageTextContains('Unrecognized username or password. Forgot your password?');
+    $this->assertSession()->pageTextContains('Nieznana nazwa użytkownika lub hasło. Nie pamiętasz hasła?');
     $this->drupalGet('filter/tips');
-    $this->assertSession()->pageTextNotContains('Unrecognized username or password. Forgot your password?');
+    $this->assertSession()->pageTextNotContains('Nieznana nazwa użytkownika lub hasło. Nie pamiętasz hasła?');
   }
 
 }

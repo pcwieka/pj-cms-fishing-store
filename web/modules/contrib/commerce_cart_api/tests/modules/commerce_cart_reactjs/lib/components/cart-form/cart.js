@@ -97,7 +97,7 @@ class Cart extends Component {
           ))}
           <tfoot>
             <td colSpan="2" />
-            <td><button onClick={this.doItemsUpdate.bind(this)}>Update quantities</button></td>
+            <td><button onClick={this.doItemsUpdate.bind(this)}>Aktualizuj koszyk</button></td>
             <td><div>{formatPrice(this.state.cart.total_price)}</div></td>
           </tfoot>
         </table>

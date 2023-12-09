@@ -170,7 +170,7 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
         '#alt' => $this->t('Shopping cart'),
       ],
       '#count' => $count,
-      '#count_text' => $this->formatPlural($count, '@count item', '@count items'),
+      '#count_text' => $this->formatPlural($count, '@count rzecz', '@count rzeczy'),
       '#url' => Url::fromRoute('commerce_cart.page')->toString(),
       '#content' => $cart_views,
       '#links' => $links,
