@@ -56,6 +56,6 @@ function belgrade_preprocess_form_element(&$variables) {
  */
 function belgrade_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Display the "Forgot your password?" link under the password input.
-  $pass_link = Link::fromTextAndUrl(t('Forgot your password?'), Url::fromUri('route:user.pass', ['attributes' => ['class' => ['pass-link']]]))->toString();
+  $pass_link = Link::fromTextAndUrl(t('Nie pamiętasz hasła?'), Url::fromUri('route:user.pass', ['attributes' => ['class' => ['pass-link']]]))->toString();
   $form['pass']['#suffix'] = $pass_link;
 }

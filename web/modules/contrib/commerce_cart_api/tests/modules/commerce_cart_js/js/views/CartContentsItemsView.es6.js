@@ -60,7 +60,7 @@
         '          </tbody>\n' +
         '          <tfoot>' +
         '<td/>' +
-        '<td colspan="3"><button class="cart-block--contents__update">Update quantities</button></td>' +
+        '<td colspan="3"><button class="cart-block--contents__update">Aktualizuj koszyk</button></td>' +
         '          </tfoot>' +
         '        </table>\n' +
         '        </div>'
