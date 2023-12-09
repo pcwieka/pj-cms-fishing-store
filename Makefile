@@ -5,7 +5,7 @@ PROJECT_NAME=fishing-store
 EXCLUDES_FILE=rsync-exclude
 
 CONTAINER_NAME=$(PROJECT_NAME)
-CONTAINER_TARGET_PATH=/opt/drupal
+CONTAINER_TARGET_PATH=/opt/drupal/fishing-store
 
 SSH_COMMAND=ssh -p 22222
 SSH_USER=serwer2328033
