@@ -34,6 +34,6 @@ lakes_gear.store.lakes_gear:
   path: '/lakes-gear'
   defaults:
     _controller: '\Drupal\lakes_gear\Controller\Store\LakesGearStoreController::lakesGear'
-    _title: 'Wędkuj z nami!'
+    _title: 'Dedykowane produkty dla jezior'
   requirements:
     _permission: 'access content'
