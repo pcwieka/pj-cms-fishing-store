@@ -7,10 +7,10 @@
 
 .testimonial{
   margin-bottom: 0;
-  background-image: url("../images/testimonial.png");
+  background-image: url("../images/fisherman-pier-catching-fish-during-sunny-beautiful-day-dark.jpeg");
   background-size: cover;
   background-position: center;
-  padding: 85px 0;
+  height: 350px;
   &__text{
     font-style: italic;
   }
@@ -22,13 +22,13 @@
 .lakes-gear {
   text-decoration: none;
   color: inherit;
-  background-image: url("../images/man-fishing-sunset.jpg");
+  background-image: url("../images/top-view-fishing-essentials-dark.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 350px;
 
   .container-fluid {
     width: 100%;
@@ -39,13 +39,13 @@
   font-style: italic;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 36px;
+  font-size: 40px;
   font-weight: bold;
   color: #ffffff;
   transition: font-size 0.3s ease, color 0.3s ease;
 
   &:hover {
-    font-size: 43px;
-    color: #dddddd;
+    font-size: 45px;
+    color: #ffffff;
   }
 }
