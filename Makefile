@@ -35,6 +35,7 @@ docker-upload-dry-run: compile-scss
 
 docker-upload: compile-scss
 	rsync -av -e 'docker exec -i' --delete --exclude-from=$(EXCLUDES_FILE) ./ $(CONTAINER_NAME):$(CONTAINER_TARGET_PATH)
+	docker exec $(CONTAINER_NAME) /bin/bash -c "cd $(CONTAINER_TARGET_PATH) && bin/drush cr"
 
 # Server
 ssh:
@@ -48,3 +49,4 @@ upload-dry-run: compile-scss
 
 upload: compile-scss
 	rsync -av -e "$(SSH_COMMAND)" --delete --exclude-from=$(EXCLUDES_FILE) ./ $(SSH_SERVER_UPLOAD_FULL_PATH)
+	$(SSH_COMMAND) $(SSH_USER)@$(SSH_SERVER_URL) "cd $(SSH_SERVER_TARGET_DIRECTORY) && bin/drush cr"
