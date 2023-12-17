@@ -38,6 +38,22 @@ function lakes_gear_schema() {
                 'length' => 255,
                 'not null' => TRUE,
             ],
+            'description' => [
+                'description' => 'The description of the lake.',
+                'type' => 'text',
+                'not null' => FALSE,
+            ],
+            'google_maps_url' => [
+                'description' => 'The Google map src URL',
+                'type' => 'text',
+                'not null' => TRUE,
+            ],
+            'image_fid' => [
+                'description' => 'The file ID of the lake image.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => FALSE,
+            ],
         ],
         'primary key' => ['lake_id'],
     ];

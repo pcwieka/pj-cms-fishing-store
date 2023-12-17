@@ -12,3 +12,23 @@
 function lakes_gear_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'lakes_gear/lakes_gear';
 }
+
+/**
+ * Implements hook_theme().
+ */
+function lakes_gear_theme($existing, $type, $theme, $path) {
+  return [
+    'lakes_gear_lakes_list' => [
+      'variables' => ['lakes' => NULL],
+      'template' => 'lakes-gear-lakes-list',
+    ],
+    'lakes_gear_lake_page' => [
+      'variables' => [
+        'lake' => NULL,
+        'lake_image_url' => NULL,
+        'products' => NULL,
+      ],
+      'template' => 'lakes-gear-lake-page',
+    ]
+  ];
+}

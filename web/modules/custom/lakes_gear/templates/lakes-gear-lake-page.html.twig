@@ -1,0 +1,28 @@
+<div class="lake-container">
+  <div class="lake-image">
+    <img src="{{ lake_image_url }}" alt="{{ lake.lake_name }}" />
+    <h2>{{ lake.lake_name }}</h2>
+  </div>
+  <div class="lake-description">
+    {{ lake.description|raw }}
+  </div>
+  {% if lake.google_maps_url %}
+    <div class="lake-map">
+      <iframe src="{{ lake.google_maps_url }}" width="1200" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  {% endif %}
+  {% if products %}
+    <h3 class="lake-recommended-products-header">Polecane produkty</h3>
+    <div>
+      <label for="product-search-input">Szukaj produktu</label>
+      <input type="text" id="product-search-input" class="form-text form-control" placeholder="Wpisz nazwę produktu...">
+    </div>
+    <div class="lake-products-grid">
+      {% for product in products %}
+        <div class="lake-product-item">
+          {{ product }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

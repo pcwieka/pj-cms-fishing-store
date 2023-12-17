@@ -24,11 +24,11 @@ class LakesGearAdminController extends ControllerBase {
 
     foreach ($result as $row) {
       // Tworzenie linków do edycji i usuwania
-      $edit_url = Url::fromRoute('lakes_gear.admin.edit', ['lake_id' => $row->lake_id]);
+      $edit_url = Url::fromRoute('lakes_gear.admin.lakes.edit', ['lake_id' => $row->lake_id]);
       $edit_link = Link::fromTextAndUrl($this->t('Edit'), $edit_url)->toString();
 
       // Link do usuwania
-      $delete_url = Url::fromRoute('lakes_gear.admin.delete', ['lake_id' => $row->lake_id]);
+      $delete_url = Url::fromRoute('lakes_gear.admin.lakes.delete', ['lake_id' => $row->lake_id]);
       $delete_link = Link::fromTextAndUrl($this->t('Delete'), $delete_url)->toString();
 
       // Połączenie linków w jednej komórce

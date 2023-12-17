@@ -1,0 +1,14 @@
+<div>
+  <input type="text" id="lake-search-input" class="form-text form-control" placeholder="Wpisz nazwę jeziora...">
+</div>
+<div class="lake-list">
+  {% for lake in lakes %}
+    <div class="lake-list-item">
+      <a href="{{ path('lakes_gear.store.lake', {'lake_id': lake.lake_id}) }}">
+        <img src="{{ lake.image_url }}" alt="{{ lake.name }}" />
+        <h2>{{ lake.name }}</h2>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+

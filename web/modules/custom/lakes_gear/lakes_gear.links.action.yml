@@ -1,5 +1,5 @@
-lakes_gear.add_lake:
-  route_name: lakes_gear.admin.add
+lakes_gear.admin.add_lake:
+  route_name: lakes_gear.admin.lakes.add
   title: 'Dodaj nowe jezioro'
   appears_on:
-    - lakes_gear.admin.list
+    - lakes_gear.admin.lakes
