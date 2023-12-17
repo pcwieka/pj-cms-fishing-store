@@ -18,7 +18,7 @@ class DeleteLakeForm extends ConfirmFormBase {
   }
 
   public function getCancelUrl() {
-    return new Url('lakes_gear.admin.list');
+    return new Url('lakes_gear.admin.lakes');
   }
 
   public function getDescription() {
@@ -48,7 +48,7 @@ class DeleteLakeForm extends ConfirmFormBase {
     }
 
     // Przekieruj użytkownika z powrotem do listy jezior.
-    $form_state->setRedirect('lakes_gear.admin.list');
+    $form_state->setRedirect('lakes_gear.admin.lakes');
   }
 }
 

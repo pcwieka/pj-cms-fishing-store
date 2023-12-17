@@ -6,6 +6,8 @@ lakes_gear:
     theme:
       css/lakes_gear.css: {}
   dependencies:
+    - core/jquery
+    - core/drupal
     - core/drupalSettings
     - lakes_gear/jquery-labelauty
 

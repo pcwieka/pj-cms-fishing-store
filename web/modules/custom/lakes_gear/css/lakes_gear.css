@@ -1,16 +1,99 @@
-.lakes-gear-products-grid {
+
+/* Admin */
+
+.lakes-menu-icon {
+  background-image: url('../icons/fish-menu-icon.png');
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: 8px center;
+}
+
+/* Store */
+
+/* Lakes Page */
+.lake-list-item {
+  width: 100%;
+  margin-top: 20px; /* Odstęp między jeziorami */
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.lake-list-item img {
+  width: 100%;
+  height: 400px; /* Wysokość obrazu */
+  object-fit: cover; /* Obraz jest przycinany, aby pasował do kontenera */
+  object-position: center; /* Centrowanie obrazu */
+}
+
+.lake-list-item h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 65px;
+  transition: font-size 0.3s ease, color 0.3s ease;
+}
+
+.lake-list-item h2:hover {
+  font-size: 76px; /* Opcjonalnie, zwiększenie rozmiaru czcionki */
+}
+
+/* Lake Page */
+.lake-image {
+  position: relative; /* Ustawienie kontenera jako punktu odniesienia dla pozycjonowania absolutnego */
+  width: 100%;
+  height: 250px; /* Wysokość obrazu */
+  overflow: hidden; /* Ukrywa części obrazu nie mieszczące się w kontenerze */
+}
+
+.lake-image img {
+  width: 100%;
+  height: 100%; /* Dopasowanie wysokości do kontenera */
+  object-fit: cover; /* Obraz jest przycinany, aby pasował do kontenera */
+  object-position: center; /* Centrowanie obrazu */
+}
+
+.lake-image h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centrowanie tekstu w poziomie i pionie */
+  color: white;
+  font-size: 60px;
+  text-align: center; /* Centrowanie tekstu */
+}
+
+.lake-description {
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+.lake-map {
+  display: flex;
+  justify-content: center; /* Centruje mapę w poziomie */
+  align-items: center; /* Centruje mapę w pionie */
+  margin-top: 40px; /* Dodaje odstęp od górnego elementu */
+  margin-bottom: 20px; /* Dodaje odstęp od dolnego elementu */
+}
+
+.lake-recommended-products-header {
+  font-size: 35px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  text-align: center; /* Wycentrowanie tekstu w poziomie */
+}
+
+.lake-products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 15px;
 }
 
-.lakes-gear-product-item {
+.lake-product-item {
   margin: 10px;
-}
-
-.lakes-gear-menu-icon {
-  background-image: url('../icons/fish-menu-icon.png');
-  background-repeat: no-repeat;
-  background-size: 20px 20px;
-  background-position: 8px center;
 }

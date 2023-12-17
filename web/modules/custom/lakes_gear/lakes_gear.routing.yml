@@ -1,4 +1,5 @@
-lakes_gear.admin.list:
+### Admin
+lakes_gear.admin.lakes:
   path: '/admin/lakes-gear/lakes'
   defaults:
     _controller: '\Drupal\lakes_gear\Controller\Admin\LakesGearAdminController::listLakes'
@@ -6,34 +7,42 @@ lakes_gear.admin.list:
   requirements:
     _permission: 'administer lakes gear'
 
-lakes_gear.admin.add:
-  path: '/admin/lakes-gear/lake/add'
+lakes_gear.admin.lakes.add:
+  path: '/admin/lakes-gear/lakes/add'
   defaults:
     _form: '\Drupal\lakes_gear\Form\Admin\AddLakeForm'
     _title: 'Dodaj jezioro'
   requirements:
     _permission: 'administer lakes gear'
 
-lakes_gear.admin.edit:
-  path: '/admin/lakes-gear/lake/{lake_id}/edit'
+lakes_gear.admin.lakes.edit:
+  path: '/admin/lakes-gear/lakes/{lake_id}/edit'
   defaults:
     _form: '\Drupal\lakes_gear\Form\Admin\EditLakeForm'
     _title: 'Edytuj jezioro'
   requirements:
     _permission: 'administer lakes gear'
 
-lakes_gear.admin.delete:
-  path: '/admin/lakes-gear/lake/{lake_id}/delete'
+lakes_gear.admin.lakes.delete:
+  path: '/admin/lakes-gear/lakes/{lake_id}/delete'
   defaults:
     _form: '\Drupal\lakes_gear\Form\Admin\DeleteLakeForm'
     _title: 'Usuń jezioro'
   requirements:
     _permission: 'administer lakes gear'
 
-lakes_gear.store.lakes_gear:
-  path: '/lakes-gear'
+### Store
+lakes_gear.store.lakes:
+  path: '/lakes'
   defaults:
-    _controller: '\Drupal\lakes_gear\Controller\Store\LakesGearStoreController::lakesGear'
-    _title: 'Dedykowane produkty dla jezior'
+    _controller: '\Drupal\lakes_gear\Controller\Store\LakesGearStoreController::lakes'
+    _title: 'Wędkuj z nami!'
+  requirements:
+    _permission: 'access content'
+
+lakes_gear.store.lake:
+  path: '/lakes/{lake_id}'
+  defaults:
+    _controller: '\Drupal\lakes_gear\Controller\Store\LakesGearStoreController::lake'
   requirements:
     _permission: 'access content'
