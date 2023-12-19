@@ -31,8 +31,11 @@ class LakesGearAdminController extends ControllerBase {
       $delete_url = Url::fromRoute('lakes_gear.admin.lakes.delete', ['lake_id' => $row->lake_id]);
       $delete_link = Link::fromTextAndUrl($this->t('Delete'), $delete_url)->toString();
 
+      $show_on_page_url = Url::fromRoute('lakes_gear.store.lake', ['lake_id' => $row->lake_id]);
+      $show_on_page_link = Link::fromTextAndUrl($this->t('Pokaż na stronie'), $show_on_page_url)->toString();
+
       // Połączenie linków w jednej komórce
-      $operations = $edit_link . ' ' . $delete_link;
+      $operations = $show_on_page_link . ' ' . $edit_link . ' ' . $delete_link;
 
       $rows[] = [
         'data' => [
