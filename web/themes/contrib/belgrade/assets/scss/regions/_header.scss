@@ -4,13 +4,17 @@
 .region-header {
   margin-bottom: 20px;
   padding: 20px 0;
+  background-image: url('../images/header-lake-background.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
 
   .logo {
     display: flex;
     flex-shrink: 0;
     margin-right: auto;
     img {
-      width: 420px;
+      width: 200px;
     }
   }
 
