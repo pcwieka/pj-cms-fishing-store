@@ -39,8 +39,8 @@
        * @type {Object}
        */
       countText: {
-        singular: '1 item',
-        plural: '@count items'
+        singular: '1 rzecz',
+        plural: '@count rzeczy'
       },
 
       /**
