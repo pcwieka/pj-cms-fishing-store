@@ -73,6 +73,13 @@ function lakes_gear_schema() {
                 'unsigned' => TRUE,
                 'not null' => TRUE,
             ],
+            'priority' => [
+                'description' => 'The priority of the product for the lake.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ]
         ],
         'foreign keys' => [
             'lake_id' => ['lakes_gear_lakes', 'lake_id'],
@@ -99,4 +106,17 @@ function lakes_gear_requirements($phase) {
   }
 
   return $requirements;
+}
+
+function lakes_gear_update_8102() {
+    $spec = [
+        'description' => 'The priority of the product for the lake.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+    ];
+    $connection = \Drupal::database();
+    $schema = $connection->schema();
+    $schema->addField('lakes_gear_lakes_products', 'priority', $spec);
 }
