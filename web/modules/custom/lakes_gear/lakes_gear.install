@@ -76,7 +76,6 @@ function lakes_gear_schema() {
             'priority' => [
                 'description' => 'The priority of the product for the lake.',
                 'type' => 'int',
-                'unsigned' => TRUE,
                 'not null' => TRUE,
                 'default' => 0,
             ]
@@ -112,7 +111,6 @@ function lakes_gear_update_8102() {
     $spec = [
         'description' => 'The priority of the product for the lake.',
         'type' => 'int',
-        'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
     ];

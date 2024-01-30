@@ -63,12 +63,38 @@ class AddLakeForm extends FormBase {
       '#attributes' => ['class' => ['product-search'], 'autocomplete' => 'off'],
     ];
 
-    // Pole wyboru produktów
     $form['associated_products'] = [
-      '#type' => 'checkboxes',
-      '#title' => $this->t('Powiązane produkty'),
-      '#options' => $product_options,
+      '#type' => 'fieldset',
+      '#tree' => TRUE,
+      '#title' => $this->t('Powiązane produkty i priorytety'),
+      '#prefix' => '<div id="associated-products-wrapper">',
+      '#suffix' => '</div>',
     ];
+
+    foreach ($product_options as $product_id => $product_label) {
+      $form['associated_products'][$product_id] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['product-priority-container']],
+      ];
+
+      $form['associated_products'][$product_id]['checkbox'] = [
+        '#type' => 'checkbox',
+        '#title' => $product_label,
+        '#return_value' => $product_id,
+      ];
+
+      $form['associated_products'][$product_id]['priority'] = [
+        '#type' => 'number',
+        '#title' => $this->t('Priorytet'),
+        '#title_display' => 'invisible',
+        '#default_value' => 0, // Ustawienie domyślnej wartości na 0
+        '#states' => [
+          'visible' => [
+            ':input[name="associated_products[' . $product_id . '][checkbox]"]' => ['checked' => TRUE],
+          ],
+        ],
+      ];
+    }
 
     // Przycisk submit
     $form['submit'] = [
@@ -107,15 +133,18 @@ class AddLakeForm extends FormBase {
       )
       ->execute();
 
-    $selected_products = array_filter($form_state->getValue('associated_products'));
-    // Zapis powiązań produktów z jeziorem
-    foreach ($selected_products as $product_id) {
-      $connection->insert('lakes_gear_lakes_products')
-        ->fields([
-          'lake_id' => $lake_id,
-          'product_id' => $product_id,
-        ])
-        ->execute();
+    $associated_products = array_filter($form_state->getValue('associated_products'));
+    // Dodanie nowych powiązań z priorytetami
+    foreach ($associated_products as $product_id => $product_data) {
+      if (isset($product_data['checkbox']) && $product_data['checkbox']) {
+        Database::getConnection()->insert('lakes_gear_lakes_products')
+          ->fields([
+            'lake_id' => $lake_id,
+            'product_id' => $product_id,
+            'priority' => $product_data['priority'] ?? 0,
+          ])
+          ->execute();
+      }
     }
 
     \Drupal::messenger()->addMessage($this->t('Jezioro @name zotało dodane', ['@name' => $lake_name]));

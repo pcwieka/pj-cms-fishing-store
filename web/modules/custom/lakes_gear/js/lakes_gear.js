@@ -10,23 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var searchInput = document.querySelector('.product-search');
-  var checkboxesContainer = document.getElementById('edit-associated-products');
+  var productsContainer = document.getElementById('associated-products-wrapper');
 
-  if (searchInput && checkboxesContainer) {
+  if (searchInput && productsContainer) {
     searchInput.addEventListener('input', function(e) {
       var searchText = e.target.value.toLowerCase();
 
-      checkboxesContainer.querySelectorAll('.form-checkbox').forEach(function(checkbox) {
-        var label = checkbox.nextElementSibling.textContent.toLowerCase();
+      productsContainer.querySelectorAll('.product-priority-container').forEach(function(container) {
+        var label = container.querySelector('label').textContent.toLowerCase();
         if (label.includes(searchText)) {
-          checkbox.parentElement.style.display = '';
+          container.style.display = '';
         } else {
-          checkbox.parentElement.style.display = 'none';
+          container.style.display = 'none';
         }
       });
     });
   } else {
-    console.log('Element searchInput or checkboxesContainer not found');
+    console.log('Element searchInput or productsContainer not found');
   }
 });
 

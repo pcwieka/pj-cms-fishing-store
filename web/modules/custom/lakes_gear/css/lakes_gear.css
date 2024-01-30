@@ -8,6 +8,34 @@
   background-position: 8px center;
 }
 
+/* Stylizacja kontenera dla produktów i ich priorytetów */
+.product-priority-container {
+  display: flex;
+  align-items: center; /* Wyrównanie elementów pionowo w centrum */
+  justify-content: flex-start; /* Wyrównanie do lewej strony */
+  margin-bottom: 10px; /* Odstęp między rzędami */
+}
+
+.product-priority-container label {
+  flex-grow: 1; /* Label zajmuje całą dostępną przestrzeń */
+  margin-right: 10px; /* Odstęp między nazwą produktu a polem priorytetu */
+  white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+  overflow: hidden; /* Ukrywa tekst wykraczający poza pole */
+  text-overflow: ellipsis; /* Dodaje "..." na końcu przyciętego tekstu */
+}
+
+.product-priority-container input[type='checkbox'] {
+  flex-shrink: 0; /* Checkbox nie zmniejsza swojej szerokości */
+  margin-right: 5px; /* Drobna przestrzeń pomiędzy checkboxem a nazwą produktu */
+}
+
+.product-priority-container input[type='number'] {
+  flex-shrink: 0; /* Pole numeryczne nie zmniejsza swojej szerokości */
+  width: 70px; /* Odpowiednia szerokość dla pola numerycznego */
+  text-align: left; /* Wyśrodkowanie tekstu w polu */
+}
+
+
 /* Store */
 
 /* Lakes Page */

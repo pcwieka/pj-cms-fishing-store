@@ -61,25 +61,36 @@ class LakesGearStoreController extends ControllerBase {
       '#lake_image_url' => $lake_image_url
     ];
 
-    // Pobieranie powiązanych produktów
-    $product_ids = Drupal::database()->select('lakes_gear_lakes_products', 'lgp')
-      ->fields('lgp', ['product_id'])
+    $product_ids_with_priority = Drupal::database()->select('lakes_gear_lakes_products', 'lgp')
+      ->fields('lgp', ['product_id', 'priority'])
       ->condition('lake_id', $lake_id)
+      ->orderBy('priority', 'ASC') // Sortowanie według kolumny 'priority'
       ->execute()
-      ->fetchCol();
+      ->fetchAllKeyed();
+
+    $product_ids = array_keys($product_ids_with_priority);
 
     if (!empty($product_ids)) {
       $products = Product::loadMultiple($product_ids);
 
-      // Dodaj produkty do struktury strony
-      $build['lake']['#products'] = $this->renderProducts($products);
+      // Dodaj posortowane produkty do struktury strony
+      $build['lake']['#products'] = $this->renderProducts($products, $product_ids_with_priority);
     }
 
     return $build;
   }
 
-  private function renderProducts($products) {
+  private function renderProducts($products, $product_ids_with_priority) {
     $view_builder = Drupal::entityTypeManager()->getViewBuilder('commerce_product');
+    $sorted_products = [];
+
+    // Sortowanie produktów według kolejności zdefiniowanej w $product_ids_with_priority
+    foreach ($product_ids_with_priority as $product_id => $priority) {
+      if (isset($products[$product_id])) {
+        $sorted_products[] = $products[$product_id];
+      }
+    }
+
     return array_map(function($product) use ($view_builder) {
       $element = $view_builder->view($product, 'catalog');
       return [
@@ -87,7 +98,7 @@ class LakesGearStoreController extends ControllerBase {
         '#tag' => 'div',
         '#value' => render($element)
       ];
-    }, $products);
+    }, $sorted_products);
   }
 
 }

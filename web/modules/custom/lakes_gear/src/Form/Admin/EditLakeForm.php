@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Database\Database;
 use Drupal\commerce_product\Entity\Product;
+use Drupal\facets\Exception\Exception;
 use Drupal\file\Entity\File;
 
 class EditLakeForm extends FormBase {
@@ -75,12 +76,48 @@ class EditLakeForm extends FormBase {
       '#attributes' => ['class' => ['product-search'], 'autocomplete' => 'off'],
     ];
 
+    $existing_priorities = Database::getConnection()->select('lakes_gear_lakes_products', 'flp')
+      ->fields('flp', ['product_id', 'priority'])
+      ->condition('lake_id', $lake_id)
+      ->execute()->fetchAllKeyed();
+
     $form['associated_products'] = [
-      '#type' => 'checkboxes',
-      '#title' => $this->t('Powiązane produkty'),
-      '#options' => $product_options,
-      '#default_value' => $existing_products,
+      '#type' => 'fieldset',
+      '#tree' => TRUE,
+      '#title' => $this->t('Powiązane produkty i priorytety'),
+      '#prefix' => '<div id="associated-products-wrapper">',
+      '#suffix' => '</div>',
     ];
+
+    foreach ($product_options as $product_id => $product_label) {
+      $form['associated_products'][$product_id] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['product-priority-container']],
+      ];
+
+      $is_checked = in_array($product_id, $existing_products);
+
+      $form['associated_products'][$product_id]['checkbox'] = [
+        '#type' => 'checkbox',
+        '#title' => $product_label,
+        '#default_value' => $is_checked,
+        '#return_value' => $product_id,
+      ];
+
+      $priority = $existing_priorities[$product_id] ?? 0;
+
+      $form['associated_products'][$product_id]['priority'] = [
+        '#type' => 'number',
+        '#title' => $this->t('Priorytet'),
+        '#title_display' => 'invisible',
+        '#default_value' => $priority,
+        '#states' => [
+          'visible' => [
+            ':input[name="associated_products[' . $product_id . '][checkbox]"]' => ['checked' => TRUE],
+          ],
+        ],
+      ];
+    }
 
     $form['lake_id'] = [
       '#type' => 'hidden',
@@ -101,6 +138,7 @@ class EditLakeForm extends FormBase {
     $lake_name = $form_state->getValue('lake_name');
     $description = $form_state->getValue('description')['value'];
     $google_maps_url = $form_state->getValue('google_maps_url');
+    $associated_products = $form_state->getValue('associated_products');
     $image = reset($form_state->getValue('image')); // ID nowego pliku
 
     // Załaduj aktualne informacje o jeziorze
@@ -134,21 +172,23 @@ class EditLakeForm extends FormBase {
       ->execute();
 
     // Aktualizacja powiązanych produktów
+
     // Najpierw usunięcie istniejących powiązań
     Database::getConnection()->delete('lakes_gear_lakes_products')
       ->condition('lake_id', $lake_id)
       ->execute();
 
-    $selected_products = array_filter($form_state->getValue('associated_products'));
-
-    // Następnie dodanie nowych powiązań
-    foreach ($selected_products as $product_id) {
-      Database::getConnection()->insert('lakes_gear_lakes_products')
-        ->fields([
-          'lake_id' => $lake_id,
-          'product_id' => $product_id,
-        ])
-        ->execute();
+    // Dodanie nowych powiązań z priorytetami
+    foreach ($associated_products as $product_id => $product_data) {
+      if (isset($product_data['checkbox']) && $product_data['checkbox']) {
+        Database::getConnection()->insert('lakes_gear_lakes_products')
+          ->fields([
+            'lake_id' => $lake_id,
+            'product_id' => $product_id,
+            'priority' => $product_data['priority'] ?? 0,
+          ])
+          ->execute();
+      }
     }
 
     \Drupal::messenger()->addMessage($this->t('Jezioro @name zostało zaktualizowane', ['@name' => $lake_name]));
